@@ -1,29 +1,32 @@
-import { useLocation, useNavigate } from 'react-router-dom';
-import Button from '../components/ui/Button';
-import Card from '../components/ui/Card';
-import { formatCurrency } from '../utils/formatNumber';
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import Button from '../components/ui/Button'
+import { useLocation } from 'react-router-dom'
+import { formatCurrency } from '../utils/formatNumber'
 
 export default function Success() {
-  const { state } = useLocation() as any;
-  const navigate = useNavigate();
-  const recipientName = state?.recipient?.name || 'your recipient';
+  const location = useLocation() as { state?: any }
+  const s = location.state ?? {}
 
   return (
-    <div className="min-h-screen p-4 flex items-center justify-center">
-      <Card className="p-6 w-full max-w-sm text-center space-y-4">
-        <div className="text-3xl font-bold">Money Received!</div>
-        <div className="opacity-80">
-          Your transfer to <span className="font-semibold">{recipientName}</span> in <span className="font-semibold">{state?.country}</span> was completed successfully.
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-1 px-4 md:px-6 py-6">
+        <div className="max-w-[520px] mx-auto space-y-6 text-center card p-8">
+          <div className="text-3xl font-semibold">Money Received!</div>
+          <div className="text-soft-white/85">
+            Your transfer to <span className="font-medium">{s?.recipient?.name ?? 'Recipient'}</span> in <span className="font-medium">{s?.country ?? ''}</span> was completed successfully.
+          </div>
+          <div className="text-sm text-soft-white/75">
+            Delivered amount: <span className="font-semibold">{s?.currency ? formatCurrency(s?.recipientLocal ?? 0, s?.currency) : ''}</span>
+          </div>
+          <div className="flex gap-3 justify-center pt-2">
+            <Button to="/map">Send More</Button>
+            <Button to="/">Sign Out</Button>
+          </div>
         </div>
-        <div className="text-sm opacity-80">
-          Delivered: <span className="font-semibold">{formatCurrency(state?.result?.recipientLocal || 0, state?.currency || 'USD')}</span>
-        </div>
-
-        <div className="flex gap-3 pt-2">
-          <Button className="flex-1" onClick={() => navigate('/map')}>Send More</Button>
-          <button className="flex-1 px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20" onClick={() => { localStorage.removeItem('signedIn'); navigate('/'); }}>Sign Out</button>
-        </div>
-      </Card>
+      </main>
+      <Footer />
     </div>
-  );
+  )
 }

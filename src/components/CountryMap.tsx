@@ -1,13 +1,23 @@
 import { motion } from 'framer-motion'
+import MapGoogle from './MapGoogle'
 
 export type Country = { name: 'Mexico' | 'India', currency: 'MXN' | 'INR' }
 
 export default function CountryMap({ onSelect }: { onSelect: (country: Country) => void }) {
+  const hasGoogle = typeof window !== 'undefined' && (window as any).google
+
+  if (hasGoogle) {
+    return (
+      <div className="relative w-full aspect-[9/16] max-w-[520px] mx-auto map-panel overflow-hidden">
+        <MapGoogle onSelect={onSelect} />
+      </div>
+    )
+  }
+
+  // Fallback abstract map
   return (
-    <div className="relative w-full aspect-[9/16] max-w-[460px] mx-auto map-panel world-grid">
-      {/* Glow layers */}
+    <div className="relative w-full aspect-[9/16] max-w-[520px] mx-auto map-panel world-grid">
       <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_50%_-20%,rgba(0,209,193,0.12),rgba(255,215,0,0.05)_40%,transparent_70%)]" />
-      {/* Abstract world silhouette (ensures map is visible on load) */}
       <div className="absolute inset-0 opacity-[0.22]" aria-hidden>
         <svg viewBox="0 0 100 60" className="w-full h-full">
           <path d="M10,30 C20,10 40,5 60,8 C78,12 90,20 92,32 C94,44 82,52 66,55 C50,58 34,56 24,48 C14,40 8,36 10,30Z" fill="white"/>
@@ -15,7 +25,6 @@ export default function CountryMap({ onSelect }: { onSelect: (country: Country) 
         </svg>
       </div>
 
-      {/* Mexico hotspot */}
       <button
         onClick={() => onSelect({ name: 'Mexico', currency: 'MXN' })}
         className="absolute left-[22%] top-[58%] -translate-x-1/2 -translate-y-1/2"
@@ -28,7 +37,6 @@ export default function CountryMap({ onSelect }: { onSelect: (country: Country) 
         </motion.div>
       </button>
 
-      {/* India hotspot */}
       <button
         onClick={() => onSelect({ name: 'India', currency: 'INR' })}
         className="absolute left-[72%] top-[52%] -translate-x-1/2 -translate-y-1/2"

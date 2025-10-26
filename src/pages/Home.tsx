@@ -15,20 +15,22 @@ export default function Home() {
               Send money with <span className="text-gold">clarity</span> and confidence
             </h1>
             <p className="text-soft-white/90">
-              A premium, transparent remittance experience — blazing fast, beautifully clear, and delightfully smooth.
-            </p>
-          </div>
-
-          <div className="card p-5 space-y-4">
-            <p className="text-soft-white/80 text-sm">
               This is a demo — no real transactions. Explore world-class UX and motion.
             </p>
-            <Button to="/map" full ariaLabel="Start demo">
-              Sign In
-            </Button>
           </div>
 
-          <p className="text-xs text-soft-white/70">Tip: Replace the hero image at <code>public/assets/images/hero-placeholder.svg</code>.</p>
+          <div className="card p-6 space-y-4">
+            <p className="text-soft-white/85 text-sm">
+              Experience transparent fees, smooth animations, and a premium remittance prototype.
+            </p>
+            <div className="pt-1"></div>
+            <Button to="/map" full ariaLabel="Start demo">Sign In</Button>
+          </div>
+
+          <p className="text-xs text-soft-white/70">
+            Tip: Replace the hero image at <code>public/assets/images/hero-placeholder.svg</code> or set
+            <code> --bg-image-url </code> in <code>src/styles/theme.css</code>.
+          </p>
         </div>
       </section>
     </main>

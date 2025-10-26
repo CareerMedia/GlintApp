@@ -67,29 +67,33 @@ export default function Send() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1 px-4 md:px-6 py-6">
-        <div className="max-w-[420px] mx-auto space-y-5">
+        <div className="max-w-[560px] mx-auto space-y-6">
           <div className="flex items-center gap-3">
             <img src={corridor.country === 'India' ? 'assets/icons/india-flag.svg' : 'assets/icons/mexico-flag.svg'} alt={`${corridor.country} flag`} className="h-5 w-auto rounded-sm border border-white/20"/>
-            <h2 className="text-lg font-semibold">Send to {corridor.country}</h2>
+            <h2 className="text-2xl font-semibold">Send to {corridor.country}</h2>
           </div>
 
-          <Card className="space-y-4 p-5">
-            <Input
-              label="Amount to send (USD)"
-              inputMode="decimal"
-              type="number"
-              min="0"
-              placeholder="0.00"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-            />
-            <div className="flex items-center justify-between text-sm text-soft-white/80">
-              <span>Total fees ({feeBreakdown.totalPercent.toFixed(1)}%):</span>
-              <span className="font-medium">{formatCurrency(feesLocal.total, corridor.currency)}</span>
+          <Card className="space-y-5 p-6">
+            <div className="grid grid-cols-1 gap-4">
+              <Input
+                label="Amount to send (USD)"
+                inputMode="decimal"
+                type="number"
+                min="0"
+                placeholder="0.00"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+              />
             </div>
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-soft-white/80">Recipient will receive</span>
-              <span className="text-base font-semibold">{formatCurrency(recipientLocal, corridor.currency)}</span>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div className="p-3 rounded-xl bg-white/5 border border-white/10">
+                <div className="text-soft-white/70">Total fees ({feeBreakdown.totalPercent.toFixed(1)}%)</div>
+                <div className="text-base font-semibold">{formatCurrency(feesLocal.total, corridor.currency)}</div>
+              </div>
+              <div className="p-3 rounded-xl bg-white/5 border border-white/10">
+                <div className="text-soft-white/70">Recipient will receive</div>
+                <div className="text-base font-semibold">{formatCurrency(recipientLocal, corridor.currency)}</div>
+              </div>
             </div>
           </Card>
 
