@@ -1,25 +1,24 @@
 import { motion } from 'framer-motion'
 
-export type Country = {
-  name: 'Mexico' | 'India'
-  currency: 'MXN' | 'INR'
-}
+export type Country = { name: 'Mexico' | 'India', currency: 'MXN' | 'INR' }
 
 export default function CountryMap({ onSelect }: { onSelect: (country: Country) => void }) {
   return (
-    <div className="relative w-full aspect-[9/16] max-w-[420px] mx-auto overflow-hidden rounded-2xl border border-white/10 shadow-[0_20px_50px_rgba(10,37,64,.55)] bg-white/5 backdrop-blur-2xl">
-      {/* Stylized map background */}
+    <div className="relative w-full aspect-[9/16] max-w-[460px] mx-auto map-panel world-grid">
+      {/* Glow layers */}
       <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_50%_-20%,rgba(0,209,193,0.12),rgba(255,215,0,0.05)_40%,transparent_70%)]" />
-      <div className="absolute inset-0" aria-hidden>
-        <svg viewBox="0 0 100 100" className="w-full h-full opacity-[0.08]">
-          <path d="M10,45 C25,20 50,10 75,20 C90,30 95,45 85,60 C75,75 50,85 30,80 C15,70 5,60 10,45Z" fill="white"/>
+      {/* Abstract world silhouette (ensures map is visible on load) */}
+      <div className="absolute inset-0 opacity-[0.22]" aria-hidden>
+        <svg viewBox="0 0 100 60" className="w-full h-full">
+          <path d="M10,30 C20,10 40,5 60,8 C78,12 90,20 92,32 C94,44 82,52 66,55 C50,58 34,56 24,48 C14,40 8,36 10,30Z" fill="white"/>
+          <path d="M35,25c3-3 8-5 14-4 5,0 9,2 12,5-4,1-8,2-12,2-5,0-10-1-14-3z" fill="#0A2540" opacity="0.2"/>
         </svg>
       </div>
 
       {/* Mexico hotspot */}
       <button
         onClick={() => onSelect({ name: 'Mexico', currency: 'MXN' })}
-        className="absolute left-[22%] top-[54%] -translate-x-1/2 -translate-y-1/2"
+        className="absolute left-[22%] top-[58%] -translate-x-1/2 -translate-y-1/2"
         aria-label="Send to Mexico"
       >
         <span className="map-pulse"></span>
@@ -32,7 +31,7 @@ export default function CountryMap({ onSelect }: { onSelect: (country: Country) 
       {/* India hotspot */}
       <button
         onClick={() => onSelect({ name: 'India', currency: 'INR' })}
-        className="absolute left-[70%] top-[54%] -translate-x-1/2 -translate-y-1/2"
+        className="absolute left-[72%] top-[52%] -translate-x-1/2 -translate-y-1/2"
         aria-label="Send to India"
       >
         <span className="map-pulse"></span>

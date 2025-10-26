@@ -1,68 +1,52 @@
-import { useEffect } from 'react';
-import { motion, useAnimationControls } from 'framer-motion';
+import { motion } from 'framer-motion'
 
-type Props = {
-  onDone: () => void;
-};
-
-export default function TransferAnimation({ onDone }: Props) {
-  const controls = useAnimationControls();
-
-  useEffect(() => {
-    controls.start('visible');
-    const t = setTimeout(onDone, 3200);
-    return () => clearTimeout(t);
-  }, [controls, onDone]);
-
-  const particles = Array.from({ length: 20 });
+export default function TransferAnimation({ destination }: { destination: 'Mexico' | 'India' }) {
+  const coins = Array.from({ length: 12 }, (_, i) => i)
+  const destFlag = destination === 'India' ? 'assets/icons/india-flag.svg' : 'assets/icons/mexico-flag.svg'
 
   return (
-    <div className="relative w-full h-[60vh] mt-8">
-      {/* Glowing path */}
-      <svg viewBox="0 0 400 200" className="absolute inset-0 w-full h-full">
+    <div className="globe">
+      {/* Flag badges */}
+      <div className="absolute left-4 top-4 flag-badge">
+        <img src="assets/icons/usa-flag.svg" alt="USA" className="h-4 w-auto rounded-sm border border-white/20" />
+        <span>USA</span>
+      </div>
+      <div className="absolute right-4 top-4 flag-badge">
+        <img src={destFlag} alt={destination} className="h-4 w-auto rounded-sm border border-white/20" />
+        <span>{destination}</span>
+      </div>
+
+      {/* Earth / scene */}
+      <div className="earth"></div>
+      <div className="orbit"></div>
+
+      {/* Arc path (SVG) */}
+      <svg className="absolute inset-0" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden>
         <defs>
-          <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#00D1C1"/>
-            <stop offset="100%" stopColor="#FFD700"/>
+          <linearGradient id="coinTrail" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#FFD700" />
+            <stop offset="100%" stopColor="#FFB300" />
           </linearGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="3.5" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
         </defs>
-        <path d="M40,160 C140,60 260,60 360,120" stroke="url(#lg)" strokeWidth="3" fill="none" filter="url(#glow)"/>
+        <!-- Define a curved path from left to right with an upward arc -->
+        <path id="transferPath" d="M 10 40 C 35 10, 65 10, 90 35" fill="none" stroke="url(#coinTrail)" stroke-opacity="0.25" stroke-width="0.8"/>
       </svg>
 
-      {/* Moving particles */}
-      {particles.map((_, i) => (
+      {/* Coins moving along the arc */}
+      {coins.map((i) => (
         <motion.div
           key={i}
-          initial={{ offsetDistance: '0%', opacity: 0 }}
-          animate={{ offsetDistance: '100%', opacity: [0, 1, 1, 0] }}
-          transition={{ duration: 2.2, delay: i * 0.08, repeat: Infinity }}
-          style={{
-            offsetPath: 'path("M40,160 C140,60 260,60 360,120")',
-            position: 'absolute',
-            top: 0, left: 0,
-            width: 6, height: 6,
-            borderRadius: '9999px',
-            background: 'linear-gradient(135deg, #FFD700, #FFB300)',
-            boxShadow: '0 0 12px rgba(255,179,0,0.8)'
-          }}
-        />
+          className="absolute h-3 w-3 rounded-full"
+          style={{ background: 'linear-gradient(90deg, #FFD700, #FFB300)', filter: 'drop-shadow(0 2px 6px rgba(255,179,0,.45))' }}
+          initial={{ offsetDistance: '0%' }}
+          animate={{ offsetDistance: '100%' }}
+          transition={{ delay: i * 0.12, duration: 2.6, repeat: Infinity, repeatDelay: 0.8 }}
+        >
+          <style>{`
+            .globe [key="${i}"] { offset-path: path('M 10 40 C 35 10, 65 10, 90 35'); }
+          `}</style>
+        </motion.div>
       ))}
-
-      {/* Soft pulsing background */}
-      <motion.div
-        initial={{ opacity: 0.1 }}
-        animate={{ opacity: [0.1, 0.25, 0.1] }}
-        transition={{ duration: 2.2, repeat: Infinity }}
-        className="absolute -inset-6 rounded-3xl"
-        style={{ background: 'radial-gradient(circle at 30% 70%, rgba(0,209,193,0.2), transparent 60%), radial-gradient(circle at 80% 30%, rgba(255,215,0,0.25), transparent 55%)' }}
-      />
     </div>
-  );
+  )
 }
