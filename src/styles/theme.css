@@ -4,7 +4,7 @@
   --midnight: #0A2540;
   --teal: #00D1C1;
   --soft-white: #F8F9FA;
-  --bg-image-url: url('assets/images/hero-placeholder.svg'); /* replace with your own photo if desired */
+  --bg-image-url: url('assets/images/hero_picture.jpg'); /* replace with your own photo if desired */
 }
 
 /* Animated gradient mesh backdrop */
