@@ -7,22 +7,25 @@
   --gold-2: #FFB300;
   --midnight: #0A0F2A;
   --teal: #00D1C1;
-  --soft-white: #F8F9FA;
+  --soft-white: #FFFFFF;       /* brighter */
+  --text-primary: #FFFFFF;     /* bright text */
+  --text-secondary: #C8D0E0;   /* readable secondary */
 }
 
 * { box-sizing: border-box; }
 html, body, #root { height: 100%; }
-body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
-
-/* Premium deep purple gradient with aurora overlay */
-.app-aurora {
-  background:
-    radial-gradient(1200px 700px at 50% -20%, rgba(93,61,210,0.25), transparent 60%),
-    radial-gradient(900px 500px at 80% 10%, rgba(255,179,0,0.18), transparent 65%),
-    linear-gradient(180deg, #090B1A, #0B0F27 55%, #0A0F22);
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text-primary); /* enforce bright text */
 }
 
-/* Focus ring */
+/* Force readable text on components that used soft-white opacity variants */
+.text-soft-white, .text-white { color: var(--text-primary) !important; }
+.text-soft-white\/80 { color: var(--text-secondary) !important; }
+.text-soft-white\/70 { color: rgba(255,255,255,0.78) !important; }
+.text-soft-white\/60 { color: rgba(255,255,255,0.66) !important; }
+
+/* Focus ring (unchanged) */
 .focus-ring { outline: none; }
 .focus-ring:focus-visible {
   box-shadow: 0 0 0 2px rgba(0,209,193,0.85), 0 0 0 4px rgba(10,16,42,.85);
@@ -33,3 +36,6 @@ body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Ro
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 input[type=number] { -moz-appearance: textfield; }
+
+/* Optional soft text glow for hero titles */
+.text-glow { text-shadow: 0 0 10px rgba(255,255,255,0.32); }
