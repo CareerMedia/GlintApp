@@ -1,11 +1,24 @@
 import { motion } from 'framer-motion'
-import React from 'react'
+import React, { useMemo } from 'react'
 
 export default function TransferAnimation({ destination }: { destination: 'Mexico' | 'India' }) {
-  const coins = Array.from({ length: 14 }, (_, i) => i)
+  const coins = Array.from({ length: 16 }, (_, i) => i)
   const destFlag = destination === 'India' ? 'assets/icons/india-flag.svg' : 'assets/icons/mexico-flag.svg'
-  // Arc from ~5% to ~95% across the viewbox
-  const pathD = 'M 6 40 C 30 10, 70 10, 94 36'
+  // Full-width arc
+  const pathD = 'M 6 40 C 28 10, 72 10, 94 40'
+
+  const coinStyle = useMemo(() => ({
+    background: 'linear-gradient(90deg, #FFD700, #FFB300)',
+    filter: 'drop-shadow(0 2px 6px rgba(255,179,0,.45))',
+    // @ts-ignore
+    offsetPath: `path('${pathD}')`,
+    // @ts-ignore
+    WebkitOffsetPath: `path('${pathD}')`,
+    // @ts-ignore
+    offsetDistance: '0%',
+    // @ts-ignore
+    WebkitOffsetDistance: '0%',
+  }), [pathD])
 
   return (
     <div className="globe">
@@ -35,19 +48,8 @@ export default function TransferAnimation({ destination }: { destination: 'Mexic
         <motion.div
           key={i}
           className="absolute h-[10px] w-[10px] rounded-full"
-          style={{
-            background: 'linear-gradient(90deg, #FFD700, #FFB300)',
-            filter: 'drop-shadow(0 2px 6px rgba(255,179,0,.45))',
-            // non-standard CSS
-            offsetPath: `path('${pathD}')`,
-            WebkitOffsetPath: `path('${pathD}')`,
-            offsetDistance: '0%',
-            WebkitOffsetDistance: '0%',
-          } as any}
-          animate={{
-            offsetDistance: '100%',
-            WebkitOffsetDistance: '100%',
-          } as any}
+          style={coinStyle as any}
+          animate={{ offsetDistance: '100%', WebkitOffsetDistance: '100%' } as any}
           transition={{ delay: i * 0.12, duration: 2.8, repeat: Infinity, repeatDelay: 0.8 }}
         />
       ))}

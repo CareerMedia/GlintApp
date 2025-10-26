@@ -2,28 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  html, body, #root {
-    height: 100%;
-  }
-
-  body {
-    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
-    background: radial-gradient(1200px 800px at 60% -200px, rgba(0,209,193,0.25), transparent),
-                radial-gradient(800px 600px at -200px 60%, rgba(255,215,0,0.12), transparent),
-                var(--color-midnight-blue);
-    color: var(--color-soft-white);
-  }
+:root {
+  --gold-1: #FFD700;
+  --gold-2: #FFB300;
+  --midnight: #0A0F2A;
+  --teal: #00D1C1;
+  --soft-white: #F8F9FA;
 }
 
-@layer components {
-  .glint-gradient {
-    background-image: linear-gradient(135deg, var(--color-gold-start), var(--color-gold-end));
-  }
-  .glass {
-    background: rgba(255,255,255,0.06);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.08);
-  }
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+
+/* Premium deep purple gradient with aurora overlay */
+.app-aurora {
+  background:
+    radial-gradient(1200px 700px at 50% -20%, rgba(93,61,210,0.25), transparent 60%),
+    radial-gradient(900px 500px at 80% 10%, rgba(255,179,0,0.18), transparent 65%),
+    linear-gradient(180deg, #090B1A, #0B0F27 55%, #0A0F22);
 }
+
+/* Focus ring */
+.focus-ring { outline: none; }
+.focus-ring:focus-visible {
+  box-shadow: 0 0 0 2px rgba(0,209,193,0.85), 0 0 0 4px rgba(10,16,42,.85);
+  border-radius: 12px;
+}
+
+/* Hide number input spinners */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { -moz-appearance: textfield; }

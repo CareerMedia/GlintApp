@@ -3,9 +3,9 @@ import Button from '../components/ui/Button'
 export default function Home() {
   return (
     <main className="hero-wrap">
-      <div className="hero-bg"></div>
-      <div className="hero-overlay"></div>
-      <div className="animated-mesh"></div>
+      <div className="hero-bg" />
+      <div className="hero-overlay" />
+      <div className="animated-mesh" />
 
       <section className="hero-content">
         <div className="space-y-8">
@@ -19,12 +19,12 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="card p-6 space-y-4">
-            <p className="text-soft-white/85 text-sm">
-              Experience transparent fees, smooth animations, and a premium remittance prototype.
+          <Button to="/map" full ariaLabel="Start demo">Sign In</Button>
+
+          <div className="card p-5">
+            <p className="text-soft-white/80 text-sm">
+              Transparent fees, smooth animations, and a premium remittance prototype.
             </p>
-            <div className="pt-1"></div>
-            <Button to="/map" full ariaLabel="Start demo">Sign In</Button>
           </div>
 
           <p className="text-xs text-soft-white/70">

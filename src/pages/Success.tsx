@@ -12,7 +12,7 @@ export default function Success() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1 px-4 md:px-6 py-6">
-        <div className="max-w-[520px] mx-auto space-y-6 text-center card p-8">
+        <div className="max-w-[560px] mx-auto space-y-6 text-center card p-8">
           <div className="text-3xl font-semibold">Money Received!</div>
           <div className="text-soft-white/85">
             Your transfer to <span className="font-medium">{s?.recipient?.name ?? 'Recipient'}</span> in <span className="font-medium">{s?.country ?? ''}</span> was completed successfully.

@@ -3,7 +3,7 @@ import ErrorBoundary from './components/ErrorBoundary'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-midnight bg-glint-radial text-soft-white font-sans">
+    <div className="min-h-screen app-aurora text-soft-white font-sans">
       <ErrorBoundary>
         <AppRoutes />
       </ErrorBoundary>
