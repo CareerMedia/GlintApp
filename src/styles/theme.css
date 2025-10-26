@@ -1,0 +1,98 @@
+/* Glint brand utilities + neoglassmorphism */
+:root {
+  --gold-1: #FFD700;
+  --gold-2: #FFB300;
+  --midnight: #0A2540;
+  --teal: #00D1C1;
+  --soft-white: #F8F9FA;
+}
+
+/* Gold gradient button with glass sheen */
+.btn-gold {
+  position: relative;
+  background-image: linear-gradient(90deg, var(--gold-1), var(--gold-2));
+  color: #0A2540;
+  transition: transform .08s ease, filter .2s ease, box-shadow .2s ease;
+  border-radius: 14px;
+  box-shadow:
+    0 4px 10px rgba(255, 179, 0, 0.25),
+    inset 0 0 0 1px rgba(255,255,255,0.35);
+}
+.btn-gold::after {
+  /* glass highlight */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0) 40%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+.btn-gold:hover { filter: brightness(1.05); box-shadow: 0 8px 24px rgba(255, 179, 0, 0.35), inset 0 0 0 1px rgba(255,255,255,0.45); }
+.btn-gold:active { transform: translateY(1px) scale(0.99); }
+
+.text-gold {
+  background-image: linear-gradient(90deg, var(--gold-1), var(--gold-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Neoglass card/surface */
+.card {
+  position: relative;
+  background: rgba(255,255,255,0.06);
+  border-radius: 18px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow:
+    0 12px 30px rgba(10, 37, 64, 0.45),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+}
+.card::before {
+  /* subtle inner glow */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(120% 120% at 0% 0%, rgba(0,209,193,0.16), transparent 50%),
+              radial-gradient(120% 120% at 100% 100%, rgba(255,215,0,0.12), transparent 50%);
+  pointer-events: none;
+}
+
+/* Header/footer glass bars */
+.glass-bar {
+  background: rgba(10,37,64,0.6);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Focus ring utility */
+.focus-ring { outline: none; }
+.focus-ring:focus-visible {
+  box-shadow: 0 0 0 2px rgba(0,209,193,0.75), 0 0 0 4px rgba(10,37,64, 0.9);
+  border-radius: 12px;
+}
+
+/* Map pulse */
+.map-pulse {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+  background: linear-gradient(90deg, var(--gold-1), var(--gold-2));
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, .6); }
+  70% { box-shadow: 0 0 0 18px rgba(255, 215, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+}
+
+/* Decorative background glow */
+.bg-glint-radial {
+  background-image: radial-gradient(1200px 600px at 50% -20%, rgba(0,209,193,0.14), rgba(255,215,0,0.06) 40%, transparent 70%);
+}

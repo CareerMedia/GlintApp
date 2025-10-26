@@ -1,0 +1,19 @@
+{
+  "corridors": [
+    {
+      "country": "Mexico",
+      "currency": "MXN",
+      "fx_rate": 17.8
+    },
+    {
+      "country": "India",
+      "currency": "INR",
+      "fx_rate": 83.2
+    }
+  ],
+  "fees": {
+    "on_ramp": 1.0,
+    "off_ramp": 1.5,
+    "fx_spread": 1.0
+  }
+}
