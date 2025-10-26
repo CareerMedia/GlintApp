@@ -1,23 +1,26 @@
-import Header from '../components/Header';
-import CountryMap from '../components/CountryMap';
-import { useNavigate } from 'react-router-dom';
+import Header from '../components/Header'
+import CountryMap, { Country } from '../components/CountryMap'
+import Footer from '../components/Footer'
+import { useNavigate } from 'react-router-dom'
 
 export default function Map() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const onSelect = (country: string) => {
-    navigate(`/send?country=${encodeURIComponent(country)}`);
-  };
+  const handleSelect = (c: Country) => {
+    navigate(`/send/${encodeURIComponent(c.name)}`)
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <div className="flex-1 relative">
-        <CountryMap onSelect={onSelect} />
-      </div>
-      <div className="p-4 text-center opacity-70 text-sm">
-        Choose a corridor to begin.
-      </div>
+      <main className="flex-1 px-4 md:px-6 py-6">
+        <div className="max-w-[420px] mx-auto space-y-4">
+          <h2 className="text-xl font-semibold">Choose a destination</h2>
+          <p className="text-soft-white/80 text-sm">Tap a highlighted country to start a transfer.</p>
+          <CountryMap onSelect={handleSelect} />
+        </div>
+      </main>
+      <Footer />
     </div>
-  );
+  )
 }

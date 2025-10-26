@@ -9,7 +9,7 @@ import data from '../data/remittance.json'
 import { useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { calculateFees } from '../utils/calculateFees'
-import { convertToLocal } from '../utils/convertCurrency'
+import { convertUsdToLocal } from '../utils/convertCurrency'
 import { formatCurrency } from '../utils/formatNumber'
 
 export default function Send() {
@@ -42,13 +42,13 @@ export default function Send() {
   const amountNum = Math.max(0, Number(amount) || 0)
   const feeBreakdown = calculateFees(amountNum, fees)
   const afterFeesUSD = Math.max(0, amountNum - feeBreakdown.totalUSD)
-  const recipientLocal = convertToLocal(afterFeesUSD, corridor.fx_rate)
+  const recipientLocal = convertUsdToLocal(afterFeesUSD, corridor.fx_rate)
 
   const feesLocal = {
-    onRamp: convertToLocal(feeBreakdown.onRampUSD, corridor.fx_rate),
-    offRamp: convertToLocal(feeBreakdown.offRampUSD, corridor.fx_rate),
-    fxSpread: convertToLocal(feeBreakdown.fxSpreadUSD, corridor.fx_rate),
-    total: convertToLocal(feeBreakdown.totalUSD, corridor.fx_rate)
+    onRamp: convertUsdToLocal(feeBreakdown.onRampUSD, corridor.fx_rate),
+    offRamp: convertUsdToLocal(feeBreakdown.offRampUSD, corridor.fx_rate),
+    fxSpread: convertUsdToLocal(feeBreakdown.fxSpreadUSD, corridor.fx_rate),
+    total: convertUsdToLocal(feeBreakdown.totalUSD, corridor.fx_rate)
   }
 
   const onSend = () => {

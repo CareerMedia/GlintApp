@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 
-type Country = {
+export type Country = {
   name: 'Mexico' | 'India'
   currency: 'MXN' | 'INR'
 }
@@ -12,7 +12,6 @@ export default function CountryMap({ onSelect }: { onSelect: (country: Country) 
       <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_50%_-20%,rgba(0,209,193,0.12),rgba(255,215,0,0.05)_40%,transparent_70%)]" />
       <div className="absolute inset-0" aria-hidden>
         <svg viewBox="0 0 100 100" className="w-full h-full opacity-[0.08]">
-          {/* a stylized world-like silhouette (abstract) */}
           <path d="M10,45 C25,20 50,10 75,20 C90,30 95,45 85,60 C75,75 50,85 30,80 C15,70 5,60 10,45Z" fill="white"/>
         </svg>
       </div>

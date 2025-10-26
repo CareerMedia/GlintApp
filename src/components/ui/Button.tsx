@@ -1,25 +1,38 @@
-import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import { Link } from 'react-router-dom'
+import { ReactNode } from 'react'
+import clsx from 'clsx'
 
 type Props = {
-  children: ReactNode;
-  onClick?: () => void;
-  type?: 'button' | 'submit' | 'reset';
-  className?: string;
-  disabled?: boolean;
-};
+  children: ReactNode
+  onClick?: () => void
+  to?: string
+  type?: 'button' | 'submit' | 'reset'
+  disabled?: boolean
+  className?: string
+  full?: boolean
+  ariaLabel?: string
+}
 
-export default function Button({ children, onClick, type = 'button', className = '', disabled = false }: Props) {
+export default function Button({ children, onClick, to, type = 'button', disabled, className, full, ariaLabel }: Props) {
+  const classes = clsx(
+    'btn-gold rounded-xl px-5 py-3 font-semibold shadow-glint',
+    'focus-ring select-none',
+    full && 'w-full',
+    disabled && 'opacity-60 pointer-events-none',
+    className
+  )
+
+  if (to) {
+    return (
+      <Link to={to} className={classes} onClick={onClick} aria-disabled={disabled} aria-label={ariaLabel}>
+        {children}
+      </Link>
+    )
+  }
+
   return (
-    <motion.button
-      type={type}
-      whileTap={{ scale: disabled ? 1 : 0.98 }}
-      whileHover={{ y: disabled ? 0 : -1 }}
-      onClick={onClick}
-      disabled={disabled}
-      className={`glint-gradient text-black font-semibold rounded-xl px-5 py-3 shadow-glint focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-gold-end)] disabled:opacity-50 ${className}`}
-    >
+    <button type={type} className={classes} onClick={onClick} disabled={disabled} aria-label={ariaLabel}>
       {children}
-    </motion.button>
-  );
+    </button>
+  )
 }
